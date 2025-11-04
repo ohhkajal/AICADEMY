@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiCademy</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide-react/dist/index.js"></script>
+    <style>
+        body {
+            background: url(https://images.news18.com/ibnlive/uploads/2022/06/chandigarh-univ-165581419816x9.jpg) no-repeat center center fixed;
+            background-size: cover;
+            color: #333333;
+        }
+        .title {
+            font-family: 'Lobster', cursive;
+            font-size: 10rem;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+            transition: top 3s ease-in-out, font-size 3s ease-in-out;
+        }
+        .title .ai {
+            color: #B71C1C;
+        }
+        .title .cademy {
+            color: #FFFFFF;
+        }
+        .title.move-to-top {
+            top: 10%;
+            font-size: 4rem;
+        }
+        .content-container {
+            position: fixed;
+            bottom: -300px;
+            left: 0;
+            width: 100%;
+            transition: bottom 3s ease-in-out, opacity 3s ease-in-out;
+            opacity: 0;
+        }
+        .content-container.move-up {
+            bottom: 0;
+            opacity: 1;
+        }
+        button {
+            background: linear-gradient(to right, #D32F2F, #B71C1C);
+            color: white;
+        }
+        button:hover {
+            background: #FFC107;
+            color: #333333;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen p-4">
+    <h1 id="title" class="title"><span class="ai">Ai</span><span class="cademy">Cademy</span></h1>
+    
+    <div id="content" class="content-container flex w-full p-6 bg-black bg-opacity-50 space-x-4 justify-center">
+        <button onclick="location.href='administration.html'" class="w-1/4 h-20 p-4 rounded-lg font-semibold shadow-md text-xl">Administration</button>
+        <button onclick="location.href='academics.html'" class="w-1/4 h-20 p-4 rounded-lg font-semibold shadow-md text-xl">Academics</button>
+        <button onclick="location.href='hostel.html'" class="w-1/4 h-20 p-4 rounded-lg font-semibold shadow-md text-xl">Hostel</button>
+        <button onclick="location.href='campus.html'" class="w-1/4 h-20 p-4 rounded-lg font-semibold shadow-md text-xl">Campus Navigation</button>
+
+    </div>
+    
+    <script>
+        function setTopic(topic) {
+            alert(`You selected: ${topic}`);
+        }
+        
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('title').classList.add('move-to-top');
+                document.getElementById('content').classList.add('move-up');
+            }, 500);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiCademy - Administration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide-react/dist/index.js"></script>
+    <style>
+        body {
+            position: relative;
+            color: #333333;
+            overflow: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url(https://www.astate.edu/a/global-initiatives/international/partner-universities/Chandigarh2.jpg) no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px);
+            z-index: -1;
+        }
+        .title {
+            font-family: 'Lobster', cursive;
+            font-size: 4rem;
+            text-align: center;
+            margin-top: 20px;
+            color: #B71C1C;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 50px;
+            height: 100vh;
+            gap: 20px;
+        }
+        .info {
+            width: 60%;
+            font-size: 1.2rem;
+            background: rgba(250, 250, 250, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .info h2 {
+            font-weight: bolder;
+            text-align: center;
+        }
+        .info p {
+            margin-bottom: 0.25cm;
+        }
+        .chat-container {
+            width: 40%;
+            height: 60vh;
+            margin-right: 10px;
+            background: rgba(250, 250, 250, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .chat-box {
+            height: 250px;
+            overflow-y: auto;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+        .user-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: linear-gradient(to right, #D32F2F, #B71C1C);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            background: #FFC107;
+            color: #333333;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen p-4">
+    <h1 class="title">Administration Assistance</h1>
+
+    <div class="container">
+        <div class="info">
+            <h2>Welcome to Administration Assistance</h2>
+            <p>Here, you can find all the information regarding admissions, office hours, fee payments, and more. Our chatbot is available to help answer your queries in real-time.</p>
+
+            <ul style="text-align: left;">
+                <li>📌 Office Hours: 9 AM - 5 PM (Mon-Fri)</li>
+                <li>📌 <a href='courses.html' style='color: inherit; text-decoration: none; cursor: pointer;' onmouseover="this.style.color='#D32F2F'" onmouseout="this.style.color='inherit'">Courses Provided</a></li>
+                <li>📌 <a href='admission.html' style='color: inherit; text-decoration: none; cursor: pointer;' onmouseover="this.style.color='#D32F2F'" onmouseout="this.style.color='inherit'">Admission Process Details</a></li>
+                <li>📌 Student Helpline No: 1800 257 1800</li>
+                <li>📌 Email: admissions@cumail.in</li>
+            </ul>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-box" id="chatBox">
+                <p><strong>Bot:</strong> Hello! How can I assist you with administration-related queries?</p>
+            </div>
+            <input type="text" id="userInput" class="user-input" placeholder="Type your query..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            let userInput = document.getElementById('userInput').value;
+            if (userInput.trim() === "") return;
+            let chatBox = document.getElementById('chatBox');
+            chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+            document.getElementById('userInput').value = "";
+
+            setTimeout(() => {
+                let response = getBotResponse(userInput);
+                chatBox.innerHTML += `<p><strong>Bot:</strong> ${response}</p>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+
+        function getBotResponse(query) {
+            if (query.toLowerCase().includes("office hours")) {
+                return "The administration office is open from 9 AM to 5 PM, Monday to Friday.";
+            } else if (query.toLowerCase().includes("admission process")) {
+                return "You can apply online through our portal. For more details, visit the admission section on our website.";
+            }  else if (query.toLowerCase().includes("admission") && query.toLowerCase().includes("apply")) {
+                return "To apply for admission, go to the Admissions page and fill out the online form.";
+            } else if (query.toLowerCase().includes("admission fees")) {
+                return "Admission fees vary by program. Please refer to the Admission section for course-wise fees.";
+            } else if (query.toLowerCase().includes("tagore")) {
+                return "Tagore Hostel: ₹1,20,000/year (4-Seater Non-AC).";
+            } else if (query.toLowerCase().includes("sukhna")) {
+                return "Sukhna Hostel: ₹1,20,000/year (4-Seater Non-AC).";
+            } else if (query.toLowerCase().includes("lc")) {
+                return "LC Hostel: ₹1,20,000/year (4-Seater Non-AC).";
+            } else if (query.toLowerCase().includes("shivalik")) {
+                return "Shivalik Hostel: ₹1,20,000/year (4-Seater Non-AC).";
+            } else if (query.toLowerCase().includes("gobind")) {
+                return "Gobind Hostel: ₹1,20,000/year (4-Seater Non-AC).";
+            } else if (query.toLowerCase().includes("nc")) {
+                return "NC Hostel: ₹1,20,000/year (4-Seater Non-AC).";
+            } else if (query.toLowerCase().includes("zakir")) {
+                return "Zakir Hostel: ₹1,38,000/year (5-Seater AC), ₹1,06,000/year (5-Seater Non-AC).";
+            } else if (query.toLowerCase().includes("gpa")) {
+                return "Go to the GPA Calculator page and enter your subject grades to calculate GPA.";
+            } else if (query.toLowerCase().includes("grading system")) {
+                return "The grading system uses GPA out of 10. Refer to the GPA Calculator section.";
+            } else if (query.toLowerCase().includes("exam schedule")) {
+                return "Exam schedules are listed in the Academics section under Examinations.";
+            } else if (query.toLowerCase().includes("library")) {
+                return "The Digital Library has PDFs and PPTs for all subjects.";
+            } else if (query.toLowerCase().includes("map")) {
+                return "You can view the campus on the embedded Google Map in the Campus section.";
+            } else if (query.toLowerCase().includes("placement")) {
+                return "Placement support is provided by the Career Development Cell.";
+            } else if (query.toLowerCase().includes("courses")) {
+                return "AiCademy offers B.Tech, BBA, MBA, M.Tech and more. See the Courses page.";
+            } else if (query.toLowerCase().includes("contact")) {
+                return "Email: admissions@cumail.in, Phone: 1800 257 1800. Office hours: Mon–Fri, 9 AM–5 PM.";
+            } else if (query.toLowerCase().includes("research")) {
+                return "Research labs are covered under Academics > Resources.";
+            } else if (query.toLowerCase().includes("counselling")) {
+                return "Counselling support is available in the Academics section.";
+            } else if (query.toLowerCase().includes("room types")) {
+                return "Hostels offer 3-seater , 4-seater and 5-seater.";
+            } else if (query.toLowerCase().includes("pay")) {
+                return "Fees can be paid online via the portal or offline at the admin office.";
+            } else {
+                return "I'm not sure about that. Please visit the administration office for more details.";
+            }
+        }
+    </script>
+</body>
+</html>
